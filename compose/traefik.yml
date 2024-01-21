@@ -1,0 +1,27 @@
+api:
+  insecure: true
+  dashboard: true
+
+providers:
+  docker:
+    exposedbydefault: false
+    watch: true
+    network: "bridge"
+
+http: 
+  routers:
+    api:
+      entrypoints: 
+      - "web"
+      service: "api@internal"
+      rule: "Host(`localhost`)"
+
+entrypoints: 
+  web:
+    address:  :80
+  api:
+    address:  :3000
+
+log:
+  level: DEBUG
+
