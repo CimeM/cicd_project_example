@@ -12,8 +12,6 @@ import os
 from typing import List
 
 api2_url = os.environ.get('API2_URL')
-from models import Landmark, LandmarkUpdate
-# from router_landmark import router as landmark_router
 
 # config = dotenv_values(".env")
 
@@ -38,11 +36,11 @@ app.add_middleware(
 async def main():
     return {"message": "Hello World"}
 
-# @app.get("/landmark", response_description="List all landmarks", response_model=List[Landmark])
-# def list_landmarks(request: Request):
-#     response = requests.get(api2_url)
-#     assert response.status_code == 200, f"Expected 200 but got {response.status_code}"
-#     return response
+@app.get("/count_landmark", response_description="Count all landmarks by calling landmark api")
+def list_landmarks(request: Request):
+    response = requests.get(api2_url+"/landmark")
+    assert response.status_code == 200, f"Expected 200 but got {response.status_code}"
+    return {"n_of_landmarks": len(response.json())}
 
 # @app.post("/landmark", response_description="Create a new landmark", status_code=status.HTTP_201_CREATED, response_model=Landmark)
 # def create_landmark(request: Request, landmark: Landmark = Body(...)):
@@ -64,4 +62,4 @@ def startup_db_client():
 def shutdown_db_client():
     print("stoping")
 
-    # app.mongodb_client.close()
+    # app.mongodb_client.close(),

@@ -11,14 +11,21 @@ Motivations:
 
 ## Case1: Local development
 
-1. run mongodb and app1
-`docker-compose up --build traefik app1 mongodb --build`
+1. run mongodb and app2
+`docker-compose up --build traefik api2 mongodb  && docker-compose down && docker-compose rm -f`
 2. develop and run app2 locally
+`` cd api1 && pytohn ... ``
 
 ## Case2: Integration testing (Level1)
 
 1. Test container runs test examples against individual containers
-`docker-compose --profile integrationtestL1 up -d --build`
+
+``` bash
+docker-compose --profile integrationtestL1 up -d --build 
+docker-compose logs integrationtestL1
+docker-compose logs integrationtestL1 | grep "All tests passed" 
+docker-compose --profile integrationtestL1 down && docker-compose rm -f
+```
 
 > You can use this example in pipeline
 

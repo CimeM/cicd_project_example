@@ -2,6 +2,10 @@ api:
   insecure: true
   dashboard: true
 
+api1:
+  insecure: true
+  dashboard: true
+
 providers:
   docker:
     exposedbydefault: false
@@ -21,6 +25,8 @@ entrypoints:
     address:  :80
   api:
     address:  :3000
+  api1:
+    address:  :5000
 
 log:
   level: DEBUG
